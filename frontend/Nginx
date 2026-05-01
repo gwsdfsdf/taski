@@ -1,0 +1,18 @@
+server {
+
+    listen 80;
+    server_name публичный_ip_вашего_удалённого_сервера;
+
+    # Новый блок.
+    location /api/ {
+        # Эта команда определяет, куда нужно перенаправить запрос.
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location / {
+        root   /var/www/taski;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+}
