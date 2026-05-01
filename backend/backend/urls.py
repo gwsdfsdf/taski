@@ -9,7 +9,15 @@ router = routers.DefaultRouter()
 router.register('tasks', views.TaskView, 'task')
 
 urlpatterns = [
-    path('', lambda request: JsonResponse({"status": "ok"})),  # 👈 ВОТ ЭТО ДОБАВИТЬ
+    path('', lambda request: JsonResponse({"status": "ok"})),
     path('admin/', admin.site.urls),
+
+    # API
     path('api/', include(router.urls)),
+
+    # USERS (ВАЖНО: именно users.urls)
+    path('api/users/', include('djoser.urls')),
+
+    # AUTH TOKEN
+    path('api/auth/', include('djoser.urls.authtoken')),
 ]
