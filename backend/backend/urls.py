@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
@@ -8,6 +9,7 @@ router = routers.DefaultRouter()
 router.register('tasks', views.TaskView, 'task')
 
 urlpatterns = [
+    path('', lambda request: JsonResponse({"status": "ok"})),  # 👈 ВОТ ЭТО ДОБАВИТЬ
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]
